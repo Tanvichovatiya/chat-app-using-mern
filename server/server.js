@@ -35,7 +35,18 @@ io.on("connection",(socket)=>{
 
 //middleware setup
 app.use(express.json({limit:"4mb"}))
-app.use(cors())
+const allowedOrigins = ['https://chat-app-using-mern-three.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // if you're sending cookies or auth headers
+}));
 
 
 app.use("/api/status",(req,res)=>res.send("server is live"))

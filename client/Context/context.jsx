@@ -16,10 +16,20 @@ export const AuthProvider=({children})=>{
   const [onlineUser,setonlineuser]=useState([])
   const [socket,setSocket]=useState(null)
 
+  useEffect(() => {
+  axios.defaults.baseURL = backendUrl;
+  if (token) {
+    axios.defaults.headers.common['token'] = token;
+  }
+  checkAuth();
+}, []);
   //check if user is authenticated and if so ,set the user data and connect to the socket
   const checkAuth=async()=>{
     try {
-     const {data}= await axios.get(backendUrl+"/api/auth/check")
+     const {data}= await axios.get(backendUrl+"/api/auth/check",{
+      headers: {
+        token: token, // Explicitly send token
+      }});
      if(data.success){
       setAuthuser(data.user)
       conectSocket(data.user)
