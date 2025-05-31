@@ -38,7 +38,9 @@ app.use((req, res, next) => {
 });
 //middleware setup
 app.use(express.json({limit:"4mb"}))
-const allowedOrigins = ["https://chat-app-using-mern-qtc4k7kb6-tanvi-chovatiyas-projects.vercel.app"];
+const allowedOrigins = [
+  "https://chat-app-using-mern-qtc4k7kb6-tanvi-chovatiyas-projects.vercel.app",
+  "https://chat-app-using-mern-three.vercel.app"];
 
 app.use(cors({
   origin: function (origin, callback) {

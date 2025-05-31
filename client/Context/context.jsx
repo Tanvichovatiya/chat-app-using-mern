@@ -26,10 +26,9 @@ export const AuthProvider=({children})=>{
   //check if user is authenticated and if so ,set the user data and connect to the socket
   const checkAuth=async()=>{
     try {
-     const {data}= await axios.get(backendUrl+"/api/auth/check",{
-      headers: {
-        token: token, // Explicitly send token
-      }});
+     const {data}= awaitaxios.get("https://chat-app-using-mern-backend-o6vxe06zg-tanvi-chovatiyas-projects.vercel.app/api/auth/check", {
+  withCredentials: true // only if needed
+})
      if(data.success){
       setAuthuser(data.user)
       conectSocket(data.user)
