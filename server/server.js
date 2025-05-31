@@ -32,10 +32,13 @@ io.on("connection",(socket)=>{
   })
 })
 
-
+app.use((req, res, next) => {
+  console.log("Incoming request from:", req.headers.origin);
+  next();
+});
 //middleware setup
 app.use(express.json({limit:"4mb"}))
-const allowedOrigins = ['https://chat-app-using-mern-three.vercel.app'];
+const allowedOrigins = ["https://chat-app-using-mern-qtc4k7kb6-tanvi-chovatiyas-projects.vercel.app"];
 
 app.use(cors({
   origin: function (origin, callback) {
