@@ -42,14 +42,8 @@ const allowedOrigins = [
   "https://chat-app-using-mern-three.vercel.app",
   "http://localhost:5000"]
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // if you're sending cookies or auth headers
+  origin: allowedOrigins,
+  credentials: true // allow cookies, authorization headers, etc.
 }));
 
 
