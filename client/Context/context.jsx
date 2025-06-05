@@ -26,15 +26,13 @@ export const AuthProvider=({children})=>{
   //check if user is authenticated and if so ,set the user data and connect to the socket
   const checkAuth=async()=>{
     try {
-     const {data}= await axios.get(backendUrl+'/api/auth/check', {
-  withCredentials: true // only if needed
-})
+     const {data}= await axios.get(backendUrl+'/api/auth/check')
      if(data.success){
       setAuthuser(data.user)
       conectSocket(data.user)
      }
     } catch (error) {
-      toast.error(error.message)
+     console.log(error.message)
     }
   }
 
@@ -51,10 +49,10 @@ export const AuthProvider=({children})=>{
         localStorage.setItem('token',response.data.token)
         toast.success(response.data.message)
       }else{
-        toast.error(response.data.message)
+        console.log(error.message)
       }
     } catch (error) {
-      toast.error(error.message)
+      console.log(error.message)
     }
   }
 

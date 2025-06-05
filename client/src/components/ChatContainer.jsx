@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const ChatContainer = () => {
   const {messages,seleceteduser,setselecteduser, Sendmessage,getMessages}=useContext(ChatContext)
   const {authUser,onlineUser}=useContext(AuthContext)
-  console.log(onlineUser)
+ 
   const [input,setinput]=useState('')
   const scrollEnd=useRef()
   useEffect(()=>{
