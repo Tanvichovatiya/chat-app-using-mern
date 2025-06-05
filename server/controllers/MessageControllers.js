@@ -1,7 +1,7 @@
 import cloudinary from "../lib/Cloudinary.js";
 import Message from "../models/message.js";
 import User from "../models/UserModel.js";
-import { io,userSocketMap } from "../server.js";
+import { io,userSocketMap } from "../index.js";
 
 // Get all user ex     cept the logged in user
 export const getUsersForSidebars=async(req,res)=>{
