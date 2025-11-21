@@ -37,42 +37,24 @@ export const AuthProvider=({children})=>{
   }
 
   //Login function for handle user aothentication and socket conection
- const login = async (state, credentials) => {
-  try {
-    const response = await axios.post(
-      backendUrl + `/api/auth/${state}`,
-      credentials
-    );
-
-    // If success → store data and return
-    if (response.data.success) {
-      setAuthuser(response.data.userData);
-      conectSocket(response.data.userData);
-
-      axios.defaults.headers.common["token"] = response.data.token;
-      setToken(response.data.token);
-      localStorage.setItem("token", response.data.token);
-
-      return {
-        success: true,
-        message: response.data.message,
-        user: response.data.userData,
-      };
+  const login=async(state,credentials)=>{
+    try {
+      const response=await axios.post(backendUrl+`/api/auth/${state}`,credentials);
+      console.log(response)
+      if(response.data.success){
+        setAuthuser(response.data.userData)
+        conectSocket(response.data.userData);
+        axios.defaults.headers.common["token"]=response.data.token;
+        setToken(response.data.token)
+        localStorage.setItem('token',response.data.token)
+        toast.success(response.data.message)
+      }else{
+        console.log(error.message)
+      }
+    } catch (error) {
+      console.log(error.message)
     }
-
-    // Server returned success: false
-    return {
-      success: false,
-      message: response.data.message || "Login failed",
-    };
-  } catch (error) {
-    return {
-      success: false,
-      message: error.response?.data?.message || "Something went wrong",
-    };
   }
-};
-
 
   //logout function
 
